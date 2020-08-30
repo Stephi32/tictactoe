@@ -41,22 +41,37 @@
             </div>
         </div>
         <script>
+            const cellMap= [];
             let userValue= "x";
 
             function addBoardCellListeners () {
                 const boardcells= document.getElementsByClassName("board-cell");
+                cellMap.length= 9;
+                cellMap.fill(null);
 
                 for (let i=0; i<9; i++) {
                     boardcells[i].addEventListener("click", function(){
                         boardcells[i].innerHTML= userValue;
+                        cellMap[i]= userValue;
                         if (userValue== "x"){
                             userValue= "O";
                         }
                         else if (userValue== "O"){
                             userValue= "x";
                         }
+                        checkForWinner();
                     });
 
+                }
+            }
+
+            function checkForWinner () {
+                for (let i=0; i<Math.sqrt(cellMap.length); i++){
+                    const idx= i*Math.sqrt(cellMap.length);
+                    if (cellMap[idx] && cellMap[idx]==cellMap[idx+1] && cellMap[idx]==cellMap[idx+2]){
+                        alert(`${cellMap[idx]} wins`);
+                        break;
+                    }
                 }
             }
 
