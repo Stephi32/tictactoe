@@ -16,7 +16,7 @@
                 width: 15rem;
             }
             .board-cell {
-                flex: 0 0 1;
+                flex: 1 1 0;
                 height: 100%;
                 border: 1px solid black;
             }
@@ -40,6 +40,28 @@
                 <div class="board-cell"></div>
             </div>
         </div>
+        <script>
+            let userValue= "x";
+
+            function addBoardCellListeners () {
+                const boardcells= document.getElementsByClassName("board-cell");
+
+                for (let i=0; i<9; i++) {
+                    boardcells[i].addEventListener("click", function(){
+                        boardcells[i].innerHTML= userValue;
+                        if (userValue== "x"){
+                            userValue= "O";
+                        }
+                        else if (userValue== "O"){
+                            userValue= "x";
+                        }
+                    });
+
+                }
+            }
+
+            window.addEventListener("load", addBoardCellListeners);
+        </script>
     </body>
 
 </html>
